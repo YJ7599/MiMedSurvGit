@@ -14,7 +14,6 @@ if(!require('BiocParallel')) BiocManager::install("BiocParallel")
 if(!require('phyloseq')) remotes::install_github('joey711/phyloseq')
 if(!require('biomformat')) remotes::install_github('joey711/biomformat') 
 if(!require('DACT')) remotes::install_github("https://github.com/zhonghualiu/DACT")
-if(!require('chatgpt')) remotes::install_github('jcrodriguez1989/chatgpt')
 
 library(seqinr)
 library(shiny)
@@ -43,7 +42,6 @@ library(survival)
 library(survminer)
 library(coin)
 library(dplyr)
-library(chatgpt) 
 
 source("Source/MiMedSurv.Non.Med.R")
 source("Source/MiMedSurv.Data.Upload.R")
@@ -3393,44 +3391,6 @@ server <- function(input, output, session) {
                 }
               )
             }
-            
-            observeEvent(input$chatgpt_rank_overall, {
-              
-              output$other_opt_chat_overall <- renderUI({tagList(
-                selectInput("chatgpt_ove", "Select a discovered taxon", choices = taxa.name.rank[,2][which(taxa.name.rank[,1] == input$chatgpt_rank_overall)], width = '55%'))
-              }) 
-              
-              output$other_opt_chat_overall_2 <- renderUI({tagList(
-                textInput("rename_taxon_ove", "Rename the selected taxon", value = input$chatgpt_ove, width = '55%'),
-                p("You can rename it using a human language, for instance, deleting possible codes, special symbols or numbers (e.g., from ‘Erysipelotrichaceae_[G-1]‘ to ‘Erysipelotrichaceae‘)", style = "font-size:10pt"),
-                textInput("rename_1_ove", label = paste0("Rename the treatment variable"), value = input$treat_taxa, width = "55%"),
-                p("You can rename the treatment variable using a human language (e.g., from ‘ecig_status’ to ‘e-cigarrette’).", style = "font-size:10pt"),
-                textInput("rename_2_ove", label = paste0("Rename the outcome variable"), value = input$outcome_taxa, width = "55%"),
-                p("You can rename the outcome variable using a human language (e.g., from ‘gingival_inflammation’ to ‘gingival inflammation’).", style = "font-size:10pt"),
-                actionButton("runbtn_chat_ove", strong("Ask!"), class = "btn-info",
-                             style="color: #000000; background-color: #FFFFFF; border-color: #ff7f50")
-              )})
-              
-            }) 
-            
-            observeEvent(input$runbtn_chat_ove, {
-              withProgress(message = 'Asking ChatGPT', value = 0, {
-                incProgress(0.5, message = "Asking Chat")
-                
-                chat_result_ove <<- tryCatch(chat_gpt_mediation(input$api_gpt_overall, input$rename_taxon_ove, input$rename_1_ove, input$rename_2_ove), 
-                                             error = function(e) {  
-                                               message("You should insert your private ChatGPT API key!")
-                                               showModal(modalDialog(div("You should insert your private ChatGPT API key!")))
-                                               return(NULL)})
-                
-                output$chat_vis_overall <- renderUI({
-                  tagList(box(title = NULL, width = "60%", strong(paste0(paste("What is known about", rename_taxon_ove, "on", rename_dact_1_ove, "and", rename_dact_2_ove, "?")))),
-                          p(" ", style = "margin-bottom: -15px;"),
-                          box(title = NULL, width = "60%",
-                              p(chat_result_ove)))
-                })
-              }) 
-            })
           }
           else {
             
