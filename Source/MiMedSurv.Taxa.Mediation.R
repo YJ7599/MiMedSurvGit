@@ -1792,20 +1792,6 @@ taxa.forest.plot.pages1_sobel <- function(sobel_result, sobel_med, sobel_out, ta
   return(list(all.text.tab_1 = all.text.tab_1, all.ci.tab_1 = all.ci.tab_1, all.text.tab_2 = all.text.tab_2, all.ci.tab_2 = all.ci.tab_2))
 }
 
-chat_gpt_mediation <- function(api_key, result_names, prim_var, out_var){
-  chat_list <- list() 
-  
-  for (name in result_names){
-    Sys.setenv(OPENAI_API_KEY = as.character(api_key))
-    past_question <- paste("What is known about", name, "on", prim_var, "and", out_var)
-    chat_list[[name]] <- ask_chatgpt(past_question)
-  }
-  
-  names(chat_list) <- result_names 
-  return(chat_list)
-}
-
-#come here 0720  
 taxa.forest.plot.pages2_sobel <- function(page.taxa.q.out, page, model) {
 
   if(length(page.taxa.q.out$all.text.tab_1) == 0){
