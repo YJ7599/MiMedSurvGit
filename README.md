@@ -35,7 +35,7 @@ install.packages('shiny')
 ```
 library(shiny)
 
-runGitHub('mimedsurvgit', 'yj7599', ref = 'main')
+runGitHub('MiMedSurv', 'yj7599', ref = 'main')
 ```
 
 ## Troubleshooting Tips
