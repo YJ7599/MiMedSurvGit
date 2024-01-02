@@ -242,191 +242,6 @@ binary_cont <- function(vec){
   }
   return(type)
 }
-# 
-# mediation.taxon.ind <- function(sam.dat, taxon_med, 
-#                                 exposure, covariates, 
-#                                 outcome, interaction = TRUE, 
-#                                 regression.method = "logistic", 
-#                                 method = "bootstrap", boot.method, n.sim = 1000, inc, rank){
-#   
-#   
-#   final_list <- list() 
-#   
-#   rep_str <- c("-" = ".", ";" = ".", ":" = ".", " " = "", "\\(" = ".", "\\)" = ".", "\\]" = ".", "\\[" = ".", "\\*" = ".", "^" = ".", "&" = ".", "\\=" = ".")
-#   taxon.med <- taxon_med
-#   
-#   rownames(sam.dat) <- str_replace_all(rownames(sam.dat), rep_str)
-#   colnames(taxon.med) <- str_replace_all(colnames(taxon.med), rep_str)
-#   
-#   dat <<- cbind(taxon.med, sam.dat)  
-#   
-#   dat[, exposure] <- convert_numeric_factor(dat[, exposure])
-#   
-#   if (length(covariates) != 0){
-#     for (cov in covariates){
-#       dat[, cov] <<- convert_numeric_factor(dat[, cov])
-#     }
-#   }
-#   
-#   if (sum(is.na(dat[[outcome]])) >= 1) {
-#     ind <- which(is.na(dat[[outcome]]))
-#     dat <- dat[-ind, ]
-#   }
-#   mediator.list <- colnames(taxon.med)
-#   colnames(dat) <- c(mediator.list, colnames(sam.dat))
-#   
-#   if (treat.type == "binary"){
-#     acme.average <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     acme.control <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     acme.treated <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     ade.average <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     total <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#   } else if (treat.type == "continuous"){
-#     acme.average <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     ade.average <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#     total <- matrix(NA, nrow = length(mediator.list), ncol = 4, dimnames = list(mediator.list, c("Est", "Lower", "Upper", "P.value")))
-#   }
-#   
-#   med.out <- list() 
-#   list_binary <- list() 
-#   list_continuous <- list() 
-#   
-#   for (med in mediator.list){
-#     if (inc){
-#       incProgress(0.1/length(mediator.list), message = paste0("Calculating: ", c("Phylum", "Class", "Order", "Family", "Genus", "Species")[rank], "_", lapply(strsplit(med, split = "_"), tail, n = 1)))
-# 
-#     }else{
-#       if (as.numeric(rank) != 6){
-#         incProgress(0.13/length(mediator.list), message = paste0("Calculating: ", c("Phylum", "Class", "Order", "Family", "Genus")[rank], "_", lapply(strsplit(med, split = "_"), tail, n = 1)))
-#       }
-#     }
-#     
-#     if (length(covariates) != 0){
-#       f1 <<- as.formula(paste(med, "~", exposure, "+", paste(covariates, collapse = "+"), sep = " "))
-#       med.fit <- lm(f1, data = dat)
-#       
-#       if (interaction == TRUE){
-#         f2 <<- as.formula(paste(outcome, "~", med, "*", exposure, "+", paste(covariates, collapse = "+"), sep = " "))
-#       }else{
-#         f2 <<- as.formula(paste(outcome, "~", med, "+", exposure, "+", paste(covariates, collapse=" + "), sep= " "))
-#       }
-#     }else{
-#       f1 <<- as.formula(paste(med, "~", exposure, sep = " "))
-#       med.fit <- lm(f1, data = dat)
-#       
-#       if (interaction == TRUE){
-#         f2 <<- as.formula(paste(outcome, "~", med, "*", exposure, sep = " "))
-#       }else{
-#         f2 <<- as.formula(paste(outcome, "~", med, "+", exposure, sep= " "))
-#       }
-#     }
-#     
-#     if (outcome.type == "binary") {
-#       
-#       print(f2)
-#       if (regression.method == "probit") {
-#         out.fit <- glm(f2, data = dat, family = binomial("probit"))
-#       }
-#       else if (regression.method == "logistic") {
-#         out.fit <- glm(f2, data = dat, family = binomial("logit"))
-#       } 
-#       
-#     }else if (regression.method == "linear") {
-#       out.fit <- lm(f2, data = dat)
-#     }
-#     
-#     if (method == "quasi-Bayesian") {
-#       set.seed(0705) 
-#       med.result <- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
-#                                     robustSE = TRUE, sims = n.sim))
-#     }else if (method == "bootstrap") {
-#       set.seed(0705) 
-#       med.result <- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
-#                                     boot = TRUE, boot.ci.type = boot.method, sims = n.sim))
-#     }
-#     
-#     if(treat.type == "binary"){
-#       med.out[[med]] <- med.result 
-#       
-#       acme.average[med, ] <- c(med.result$d.avg, med.result$d.avg.ci[[1]], med.result$d.avg.ci[[2]], med.result$d.avg.p)
-#       acme.control[med,] <-  c(med.result$d0, med.result$d0.ci[[1]], med.result$d0.ci[[2]], med.result$d0.p)
-#       acme.treated[med,] <- c(med.result$d1, med.result$d1.ci[[1]], med.result$d1.ci[[2]], med.result$d1.p)
-#       ade.average[med,] <- c(med.result$z.avg, med.result$z.avg.ci[[1]], med.result$z.avg.ci[[2]], med.result$z.avg.p)
-#       total[med,] <- c(med.result$tau.coef, med.result$tau.ci[[1]], med.result$tau.ci[[2]], med.result$tau.p)
-#       
-#     } else if(treat.type == "continuous"){
-#       med.out[[med]] <- med.result 
-#       acme.average[med,] <- c(med.result$d.avg, med.result$d.avg.ci[[1]], med.result$d.avg.ci[[2]], med.result$d.avg.p)
-#       ade.average[med,] <- c(med.result$z.avg, med.result$z.avg.ci[[1]], med.result$z.avg.ci[[2]], med.result$z.avg.p)
-#       total[med,] <- c(med.result$tau.coef, med.result$tau.ci[[1]], med.result$tau.ci[[2]], med.result$tau.p)
-#     }
-#   }
-#   
-#   if(treat.type == "binary"){
-#     list.binary <- list(acme_average = data.frame(acme.average), acme_control = data.frame(acme.control), acme_treated = data.frame(acme.treated), ade_average = data.frame(ade.average), total_effect = data.frame(total))
-#     
-#     form_regression <- f2   
-#     
-#     final_list$med_out <- med.out 
-#     final_list$list_binary <- list.binary 
-#     
-#     for (i in 1:length(final_list$list_binary)){
-#       rownames(final_list$list_binary[[i]]) <- colnames(taxon_med)
-#     }}else if(treat.type == "continuous"){
-#       list.continuous <- list(acme_average = data.frame(acme.average), ade_average = data.frame(ade.average), total_effect = data.frame(total))
-#       
-#       final_list$med_out <- med.out 
-#       final_list$list_continuous <- list.continuous 
-#       
-#       for (i in 1:length(final_list$list_continuous)){
-#         rownames(final_list$list_continuous[[i]]) <- colnames(taxon_med)
-#       }
-#       
-#     }
-#   print(final_list) 
-#   invisible(final_list)
-# }
-
-# 
-# mediation.taxon.total <- function(sam.dat, taxa, 
-#                                 exposure, covariates, 
-#                                 outcome, interac = TRUE, 
-#                                 regression.method = "logistic", 
-#                                 method = "bootstrap", boot.method.po, n.sim = 1000, inc){
-#    
-#   print(covariates)
-#   
-#   outcome.type <<- binary_cont(sam.dat[,outcome])
-#   treat.type <<- binary_cont(sam.dat[,exposure])
-#   
-#   list_total <- list()
-#   lets_see <- list()
-#   
-#   
-#   for (i in 1:(5+inc)){
-#     print(i)
-#     taxon.med <- taxa[[i]]
-#   
-#     if(treat.type == "binary"){
-#       
-#       list_total[[i]] <- mediation.taxon.ind(sam.dat, taxon.med, exposure, covariates, 
-#                                outcome, interaction = interac, regression.method, 
-#                                method = method, boot.method = boot.method.po, n.sim = n.sim, inc = inc, rank = i)$list_binary
-#       
-# 
-#     }else if(treat.type == "continuous"){
-# 
-#       list_total[[i]] <- mediation.taxon.ind(sam.dat, taxon.med, exposure, covariates, 
-#                                              outcome, interaction = interac, regression.method, 
-#                                              method = method, boot.method = boot.method.po,  n.sim = n.sim, inc = inc, rank = i)$list_continuous
-#     }
-# 
-#   }
-#   print("how about here") 
-#   names(list_total) <- names(taxa)[1:5+inc]
-#   print("hmm") 
-#   invisible(list_total)
-# }
 
 name_split_list <- function(taxa){
   list_split <- list()
@@ -637,6 +452,7 @@ mediation.taxon.ind <- function(sam.dat, taxon_med, taxa_uniq_name,
         }
         
         out.fit <<- survreg(f2, data = dat)
+        set.seed(0705) 
         med.result <<- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
                                       sims = n.sim))
         
@@ -700,6 +516,7 @@ mediation.taxon.ind <- function(sam.dat, taxon_med, taxa_uniq_name,
       }
       
       out.fit <- survreg(f2, data = dat)
+      set.seed(0705) 
       med.result <- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
                                     sims = n.sim))
       
