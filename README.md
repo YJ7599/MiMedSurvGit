@@ -1,12 +1,10 @@
 # MiMedSurv
 
-Title: Comprehensive microbiome mediation analysis with survival (i.e., time-to-event) responses. 
+Title: MiMedSurv: A Unified Cloud Platform for Microbiome Causal Mediation Analysis with Survival Responses
 
 Version: 1.0.0
 
-Maintainer: Hyo Jung Jang <hyojung.jang@northwestern.edu>
-
-Description: MiMedSurv (microbiome mediation analysis with survival responses) is a unified web cloud computing platform for comprehensive microbiome mediation analysis with survival (i.e., time-to-event) responses. MiMedSurv surveys the roles of the microbiome as a mediator between the treatment (e.g., environmental, behavioral or medical exposures) and the survival response on the host’s health or disease (e.g., time to the onset of a disease). The main features of MiMedSurv are as follows. First, MiMedSurv conducts basic non-mediational analysis, not involving the microbiome in the analysis, to survey the disparity in survival time between the treatment groups (e.g., 'placebo and treatment groups' or 'old treatment and new treatment groups') (see Non-Mediational Analysis). Second, MiMedSurv conducts microbiome mediational analysis (see Mediational Analysis) in various aspects (1) as a whole microbial ecosystem using different ecological measures (e.g., alpha- and beta-diversity indices) (see Community-level Analysis) or (2) as individual microbial taxa (e.g., phyla, classes, orders, families, genera, species) using different data normalization methods (see Taxonomy-level Analysis). Importantly, MiMedSurv enables covariate-adjusted analysis to control for potential confounding factors (e.g., age, gender) for both non-mediational and mediational analyses to enhance the causality of the results especially for observational studies. Finally, MiMedSurv provides flexible and user-friendly data processing and analytic modules and makes nice graphical representations.
+Description: MiMedSurv (microbiome mediation analysis with survival responses) is a unified web cloud computing platform for comprehensive microbiome mediation analysis with survival (i.e., time-to-event) responses. MiMedSurv surveys the roles of the microbiome as a mediator between a treatment (e.g., medical intervention, environmental exposure) and a survival response on the host’s health or disease (e.g., time-to-disease, time-to-cure). The main features of MiMedSurv are as follows. First, MiMedSurv conducts basic exploratory non-mediational survival analysis, not involving microbiome, to survey the disparity in survival time between medical treatments (e.g., treatment vs. placebo, new treatment vs. old treatment) / environmental exposures (e.g., rural vs. urban, smoking vs. non-smoking). (see Non-Mediational Analysis). Second, MiMedSurv identifies the mediating roles of the microbiome in various aspects (see Mediational Analysis): (i) as a microbial ecosystem using ecological measures (e.g., alpha- and beta-diversity indices) (see Community-level Analysis) and (ii) as individual microbial taxa in various hierarchies (e.g., phyla, classes, orders, families, genera, species) (see Taxonomy-level Analysis). We also stress that MiMedSurv can conduct covariate-adjusted analysis to control for potential confounding factors (e.g., age, sex) to enhance the causality of the results especially for observational studies. MiMedSurv also provides user-friendly data preprocessing and analytic modules and makes nice visualizations.
 
 NeedsCompilation: No
 
@@ -20,7 +18,8 @@ License: GPL 1, GPL 2
 
 **Maintainer**: Hyojung Jang (hyojung.jang@northwestern.edu)
 
-**Reference**: Jang, H. and Koh, H. MiMedSurv: A Unified Web Cloud Computing Service for Microbiome Mediation Analysis with Survival Responses (In review)
+**Reference**: Jang, H., Koh, H. MiMedSurv: A Unified Web Cloud Computing Platform for Microbiome Causal Mediation Analysis with Survival Responses (In Review)
+
 
 ## Prerequites
 
