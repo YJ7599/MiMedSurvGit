@@ -95,7 +95,7 @@ tax.trans <- function(otu.tab, tax.tab, rare.otu.tab, rare.tax.tab, sub.com = TR
     if(length(tax.imp.prop) == 0) {
       tax.imp.prop <- matrix(NA, n, length(tax))
       for (i in 1:length(lib.size)) {
-        tax.imp.prop[i,] <- (tax.count[i,]+0.1)/lib.size[i]
+        tax.imp.prop[i,] <- (tax.count[i,]+1)/lib.size[i]
       }
       rownames(tax.imp.prop) <- colnames(otu.tab)
       colnames(tax.imp.prop) <- tax
