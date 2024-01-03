@@ -1,7 +1,7 @@
 rm(list = ls())
 
 list.of.packages <- c('shiny', 'rmarkdown', 'seqinr', 'shinydashboard', 'dashboardthemes', 'tidyverse', 'plotly', 'shinyWidgets', 'shinyjs', 'googleVis', 'xtable', 'rgl',
-                      'DT', 'htmltools', 'biomformat', 'phangorn', 'bios2mds', 'zip', 'zCompositions', 'dplyr', 'forestplot', 'fossil', 'picante',
+                      'DT', 'htmltools', 'biomformat', 'phangorn', 'bios2mds', 'zip', 'dplyr', 'forestplot', 'fossil', 'picante',
                       'entropart', 'dirmult', 'robustbase', 'erer', 'BiasedUrn', 'CompQuadForm', 'robCompositions', 
                       'GUniFrac', 'ecodist', 'MiRKAT', 'gridExtra', 'ggplot2', 'patchwork', 'ggthemes', 'DiagrammeR', 'stringr', 
                       'devtools', 'reticulate', 'remotes', 'gridGraphics', 'compositions', 'ICSNP', 'xtable', 'BiocManager', 'PMCMRplus', 'vegan', 'bda', 'mediation', 'survival', 'survminer', 'coin', 'dplyr')
