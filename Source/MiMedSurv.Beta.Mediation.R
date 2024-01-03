@@ -4,7 +4,6 @@
 
 library(phangorn)
 library(phyloseq)
-library(zCompositions)
 library(plotly)
 library(dplyr)
 library(forestplot)
