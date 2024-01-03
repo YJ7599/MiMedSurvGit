@@ -450,7 +450,7 @@ mediation.taxon.ind <- function(sam.dat, taxon_med, taxa_uniq_name,
         }
         
         out.fit <<- survreg(f2, data = dat)
-        set.seed(0705) 
+        set.seed(101) 
         med.result <<- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
                                       sims = n.sim))
         
@@ -514,7 +514,7 @@ mediation.taxon.ind <- function(sam.dat, taxon_med, taxa_uniq_name,
       }
       
       out.fit <- survreg(f2, data = dat)
-      set.seed(0705) 
+      set.seed(101) 
       med.result <- summary(mediate(med.fit, out.fit, treat = exposure, mediator = med,
                                     sims = n.sim))
       
