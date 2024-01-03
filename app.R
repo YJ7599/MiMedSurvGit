@@ -260,7 +260,7 @@ ui <- dashboardPage(
                              QC_LIBRARY_SIZE_COMMENT1,
                              QC_LIBRARY_SIZE_COMMENT2,
                              
-                             sliderInput("slider2", h4(strong("Mean proportion")), min = 0, max = 0.1, value = 0.002, step = 0.001,  post  = " %"),
+                             sliderInput("slider2", h4(strong("Mean proportion")), min = 0, max = 0.1, value = 0.02, step = 0.001,  post  = " %"),
                              
                              QC_MEAN_PROP_COMMENT1,
                              QC_MEAN_PROP_COMMENT2,
