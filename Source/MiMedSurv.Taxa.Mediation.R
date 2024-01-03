@@ -3,7 +3,6 @@
 ############
 library(phangorn)
 library(phyloseq)
-library(zCompositions)
 library(plotly)
 library(dplyr)
 library(forestplot)
@@ -93,7 +92,6 @@ tax.trans <- function(otu.tab, tax.tab, rare.otu.tab, rare.tax.tab, sub.com = TR
     colnames(tax.prop) <- tax
     
     tax.imp.prop <- numeric()
-    try(tax.imp.prop <- zCompositions::cmultRepl(tax.count), silent = TRUE)
     if(length(tax.imp.prop) == 0) {
       tax.imp.prop <- matrix(NA, n, length(tax))
       for (i in 1:length(lib.size)) {
@@ -4195,7 +4193,6 @@ tax.trans.na <- function(otu.tab, tax.tab, rare.otu.tab, rare.tax.tab, sub.com =
     colnames(tax.prop) <- tax
     
     tax.imp.prop <- numeric()
-    try(tax.imp.prop <- zCompositions::cmultRepl(tax.count), silent = TRUE)
     if(length(tax.imp.prop) == 0) {
       tax.imp.prop <- matrix(NA, n, length(tax))
       for (i in 1:length(lib.size)) {
