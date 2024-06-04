@@ -3749,7 +3749,6 @@ server <- function(input, output, session) {
         } 
       }) 
     
-    shinyjs::disable("runbtn_chat")
     shinyjs::enable("runbtn_taxa")
     shinyjs::enable("choose_taxa")
     shinyjs::enable("include_species_taxa")
