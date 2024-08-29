@@ -2296,7 +2296,7 @@ server <- function(input, output, session) {
         
         output$taxadataProp <- downloadHandler(
           filename = function() {
-            paste("Arcsine.Transformed.Data.zip")
+            paste("Prop.Transformed.Data.zip")
           },
           content = function(clr.file) {
             temp <- setwd(tempdir())
