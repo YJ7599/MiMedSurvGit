@@ -61,7 +61,7 @@ source("Source/MiMedSurv.Taxa.Mediation.R")
                     tags$a(href = "https://github.com/yj7599/mimedsurvgit", "https://github.com/yj7599/mimedsurvgit"), style = "font-size:13pt")
   HOME_COMMENT3 = p(strong("Maintainer:"), " Hyojung Jang (", tags$a(href = "hyojung.jang@northwestern.edu", "hyojung.jang@northwestern.edu"), 
                     ")", style = "font-size:13pt")
-  HOME_COMMENT4 = p(strong("Reference:"), " Jang, H., Koh, H. A unified web cloud computing platform MiMedSurv for microbiome causal mediation analysis with survival responses (In Review)", style = "font-size:13pt")
+  HOME_COMMENT4 = p(strong("Reference:"), " Jang, H., Koh, H. (2024) A unified web cloud computing platform MiMedSurv for microbiome causal mediation analysis with survival responses. Scientific Reports 14(20650)", style = "font-size:13pt")
   
   INPUT_PHYLOSEQ_COMMENT1 = p(strong("Notice:"), "This should be an '.Rdata' or '.rds' file, and the data should be in the 'phyloseq' format", br(), 
                               "(see ", a(tags$u("https://bioconductor.org/packages/release/bioc/html/phyloseq.html"), style = "color:red3"), ")",
