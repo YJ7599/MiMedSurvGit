@@ -20,7 +20,7 @@
 
 ## Reference
 
-* Jang, H., Koh, H. A unified web cloud computing platform MiMedSurv for microbiome causal mediation analysis with survival responses (In Review)
+* Jang, H., Koh, H. (2024) A unified web cloud computing platform MiMedSurv for microbiome causal mediation analysis with survival responses. Scientific Reports 14(20650)
 
 ## Data Processing & Analytic Modules
 
